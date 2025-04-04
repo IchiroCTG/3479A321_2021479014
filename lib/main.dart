@@ -28,9 +28,9 @@ class MyApp extends StatelessWidget {
         //
         // This works for code too, not just values: Most code changes can be
         // tested with just a hot reload.
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.red),
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const MyHomePage(title: 'Flutter Laboratorio 3 DM'),
     );
   }
 }
@@ -66,6 +66,17 @@ class _MyHomePageState extends State<MyHomePage> {
       _counter++;
     });
   }
+  void _decrementCounter(){
+    setState(() {
+      
+      _counter--;
+    });
+  }
+  void _resetCounter(){
+    setState(() {
+      _counter=0;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -75,6 +86,11 @@ class _MyHomePageState extends State<MyHomePage> {
     // The Flutter framework has been optimized to make rerunning build methods
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
+    var persistentFooterButtons = [
+        TextButton(onPressed: _incrementCounter, child: Icon(Icons.plus_one)), //Boton de incrementar
+        TextButton(onPressed: _decrementCounter, child: Icon(Icons.exposure_minus_1)), //Boton de incrementar
+        TextButton(onPressed: _resetCounter, child: Icon(Icons.exposure_zero)) //Boton de incrementar
+      ];
     return Scaffold(
       appBar: AppBar(
         // TRY THIS: Try changing the color here to a specific color (to
@@ -104,7 +120,7 @@ class _MyHomePageState extends State<MyHomePage> {
           // wireframe for each widget.
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const Text('You have pushed the button this many times:'),
+            const Text('Las vaces que has pulsado el boton es de:'),
             Text(
               '$_counter',
               style: Theme.of(context).textTheme.headlineMedium,
@@ -112,11 +128,7 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      persistentFooterButtons: persistentFooterButtons, 
     );
   }
 }
