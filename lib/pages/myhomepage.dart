@@ -58,19 +58,25 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: Center(
 
-        child: Column(
+          child: Column(
 
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            const Text(
+              'Flutter es un SDK de código abierto para crear aplicaciones nativas desde una sola base de código'
+            ),
             svgIcon,
             const Text('Las veces que has pulsado el boton es de:'),
             Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ],
-        ),
+                '$_counter',
+                style: Theme.of(context).textTheme.headlineMedium,
+              ),
+            ],
+            
+            
+          ),
       ),
+ 
       persistentFooterButtons: persistentFooterButtons, 
     );
   }
