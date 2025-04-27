@@ -49,6 +49,18 @@ class _MyHomePageState extends State<MyHomePage> {
         TextButton(onPressed: _decrementCounter, child: Icon(Icons.exposure_minus_1)), //Boton de incrementar
         TextButton(onPressed: _resetCounter, child: Icon(Icons.exposure_zero)) //Boton de incrementar
       ];
+    var card = Card(
+      clipBehavior: Clip.hardEdge,
+      child: InkWell(splashColor: Colors.red,
+      onTap: () {
+        debugPrint('Card tapped');
+      },
+      child: const SizedBox(width: 300,
+            height: 80,child: Text('Flutter es un SDK de código abierto para crear aplicaciones nativas desde una sola base de código'
+            ),),
+       
+      ),
+    );
     return Scaffold(
       appBar: AppBar(
 
@@ -62,9 +74,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const Text(
-              'Flutter es un SDK de código abierto para crear aplicaciones nativas desde una sola base de código'
-            ),
+            card,
             svgIcon,
             const Text('Las veces que has pulsado el boton es de:'),
             Text(
