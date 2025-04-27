@@ -45,21 +45,31 @@ class _MyHomePageState extends State<MyHomePage> {
           semanticsLabel:'Person1');
 
     var persistentFooterButtons = [
-        TextButton(onPressed: _incrementCounter, child: Icon(Icons.plus_one)), //Boton de incrementar
-        TextButton(onPressed: _decrementCounter, child: Icon(Icons.exposure_minus_1)), //Boton de incrementar
-        TextButton(onPressed: _resetCounter, child: Icon(Icons.exposure_zero)) //Boton de incrementar
+        TextButton(onPressed: _incrementCounter, child: Icon(Icons.plus_one),style: TextButton.styleFrom(foregroundColor: Colors.red),), //Boton de incrementar
+        TextButton(onPressed: _decrementCounter, child: Icon(Icons.exposure_minus_1),style: TextButton.styleFrom(foregroundColor: Colors.red)), //Boton de incrementar
+        TextButton(onPressed: _resetCounter, child: Icon(Icons.exposure_zero),style: TextButton.styleFrom(foregroundColor: Colors.red)) //Boton de incrementar
       ];
     var card = Card(
       clipBehavior: Clip.hardEdge,
-      child: InkWell(splashColor: Colors.red,
-      onTap: () {
-        debugPrint('Card tapped');
-      },
-      child: const SizedBox(width: 300,
-            height: 80,child: Text('Flutter es un SDK de código abierto para crear aplicaciones nativas desde una sola base de código'
-            ),),
-       
-      ),
+      color: Colors.white,
+      child: Column(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [    
+            svgIcon,                  
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text('Las veces que has presionado el boton es: ',style: TextStyle(color: Colors.black)),
+                Text('$_counter',style: TextStyle(color: Colors.black))
+              ],
+            ),
+            Row(children: persistentFooterButtons,mainAxisAlignment: MainAxisAlignment.spaceAround,
+            ),
+          ]     
+        ),
+      
+      
     );
     return Scaffold(
       appBar: AppBar(
@@ -69,25 +79,11 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: Center(
+          child: card,
 
-          child: Column(
-
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            card,
-            svgIcon,
-            const Text('Las veces que has pulsado el boton es de:'),
-            Text(
-                '$_counter',
-                style: Theme.of(context).textTheme.headlineMedium,
-              ),
-            ],
-            
-            
-          ),
       ),
  
-      persistentFooterButtons: persistentFooterButtons, 
+      //persistentFooterButtons: persistentFooterButtons, 
     );
   }
 }

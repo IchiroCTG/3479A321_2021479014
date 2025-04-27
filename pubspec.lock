@@ -304,6 +304,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.12.1"
+  stateless:
+    dependency: "direct main"
+    description:
+      name: stateless
+      sha256: "11643d36ee69a62a359c3986a58d0cb98a8a25fff25f32ff1e7924c1031210a9"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.1.1"
   stream_channel:
     dependency: transitive
     description:
