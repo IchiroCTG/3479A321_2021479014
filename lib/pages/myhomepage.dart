@@ -1,6 +1,9 @@
+import 'package:application_laboratorio3/pages/aboutPage.dart';
+import 'package:application_laboratorio3/pages/listContent_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:logger/logger.dart';
+
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
@@ -34,6 +37,14 @@ class _MyHomePageState extends State<MyHomePage> {
       _counter=0;
     });
   }
+  void _nextPage(){
+    if(_counter%2==0){
+      Navigator.push(context, MaterialPageRoute(builder: (context) => listContentPage()));
+    }
+    else{
+      Navigator.push(context, MaterialPageRoute(builder: (context) => aboutPage()));
+    }
+  }
  
   @override
   Widget build(BuildContext context) {
@@ -64,8 +75,15 @@ class _MyHomePageState extends State<MyHomePage> {
                 Text('$_counter',style: TextStyle(color: Colors.black))
               ],
             ),
-            Row(children: persistentFooterButtons,mainAxisAlignment: MainAxisAlignment.spaceAround,
+            Row(
+              children: persistentFooterButtons,mainAxisAlignment: MainAxisAlignment.spaceAround,
             ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                TextButton(onPressed: _nextPage 
+                , child: Text('Siguiente'),style: TextButton.styleFrom(foregroundColor: Colors.black,backgroundColor: Colors.red),)
+            ],),
           ]     
         ),
       
