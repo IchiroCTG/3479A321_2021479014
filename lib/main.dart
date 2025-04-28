@@ -28,7 +28,9 @@ class MyApp extends StatelessWidget {
         ),
         
         titleLarge: GoogleFonts.oswald(fontSize: 30
-        ,fontStyle: FontStyle.italic))
+        ,fontStyle: FontStyle.italic)),
+
+        
 
       ),
       home: const MyHomePage(title: 'Flutter Laboratorio 2 DM'),
