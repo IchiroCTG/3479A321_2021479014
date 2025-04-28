@@ -38,12 +38,7 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
   void _nextPage(){
-    if(_counter%2==0){
       Navigator.push(context, MaterialPageRoute(builder: (context) => listContentPage()));
-    }
-    else{
-      Navigator.push(context, MaterialPageRoute(builder: (context) => aboutPage()));
-    }
   }
  
   @override
