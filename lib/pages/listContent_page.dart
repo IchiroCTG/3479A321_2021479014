@@ -1,8 +1,9 @@
 import 'package:application_laboratorio3/pages/aboutPage.dart';
-import 'package:application_laboratorio3/pages/myhomepage.dart';
+
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:logger/logger.dart';
+
+
+
 
 class listContentPage extends StatelessWidget{
   

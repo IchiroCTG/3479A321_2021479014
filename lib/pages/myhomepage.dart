@@ -1,4 +1,4 @@
-import 'package:application_laboratorio3/pages/aboutPage.dart';
+
 import 'package:application_laboratorio3/pages/listContent_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
