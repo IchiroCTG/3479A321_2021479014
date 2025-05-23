@@ -1,4 +1,5 @@
 
+import 'package:application_laboratorio3/pages/aboutPage.dart';
 import 'package:application_laboratorio3/pages/listContent_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -51,7 +52,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
     var logger = Logger(printer: PrettyPrinter());
     logger.i('Homepage iniciada, Building widget');
-    initState() {
+    /*initState() {
       logger.i('initState() called');
     }
     didChangeDependencies() {
@@ -68,7 +69,7 @@ class _MyHomePageState extends State<MyHomePage> {
     }
     reassemble(){
       logger.i('reassemble() called');
-    }
+    }*/
         final Widget svgIcon = SvgPicture.asset(rutaIcon1, 
           semanticsLabel:'Person1');
 
@@ -112,6 +113,31 @@ class _MyHomePageState extends State<MyHomePage> {
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
 
         title: Text(widget.title),
+      ),
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: <Widget>[
+            const DrawerHeader(
+              decoration: BoxDecoration(
+                color: Colors.blue,
+              ),
+              child: Text('Menu'),
+            ),
+            ListTile(
+              title: const Text('List Content'),
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => listContentPage()));
+              },
+            ),
+            ListTile(
+              title: const Text('About'),
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => aboutPage()));
+              },
+            ),
+          ],
+        ),
       ),
       body: Center(
           child: card,
