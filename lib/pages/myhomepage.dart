@@ -1,6 +1,7 @@
 
 import 'package:application_laboratorio3/pages/aboutPage.dart';
 import 'package:application_laboratorio3/pages/listContent_page.dart';
+import 'package:application_laboratorio3/pages/preferencePage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:logger/logger.dart';
@@ -134,6 +135,12 @@ class _MyHomePageState extends State<MyHomePage> {
               title: const Text('About'),
               onTap: () {
                 Navigator.push(context, MaterialPageRoute(builder: (context) => aboutPage()));
+              },
+            ),
+            ListTile(
+              title: const Text('Preferencias'),
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => preferencePage()));
               },
             ),
           ],
