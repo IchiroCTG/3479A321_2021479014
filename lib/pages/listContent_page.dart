@@ -3,12 +3,19 @@ import 'package:application_laboratorio3/pages/aboutPage.dart';
 import 'package:flutter/material.dart';
 
 
+class listContentPage extends StatefulWidget {
+  const listContentPage({super.key});
 
+  @override
+  State<listContentPage> createState() => _listContentPage();
+}
 
-class listContentPage extends StatelessWidget{
+class _listContentPage extends State<listContentPage> {
   
   @override
+  
   Widget build(BuildContext context) {
+  print("ListContent iniciada");
   List<String> list = ['Anuncios','Imagenes','Fracciones',' Titulos'];
 
   void _nextPage(){

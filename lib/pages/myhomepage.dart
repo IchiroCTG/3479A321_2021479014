@@ -13,10 +13,15 @@ class MyHomePage extends StatefulWidget {
   final String title;
   
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
-  
+
+  State<MyHomePage> createState(){
+
+    return _MyHomePageState();
+  }
+
 }
 const String rutaIcon1 = 'Assets/Icons/person_ckbul61rtesg.svg' ;
+
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
   
@@ -45,8 +50,25 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
 
     var logger = Logger(printer: PrettyPrinter());
-    logger.i('HomePage Widget is Working!');
-    
+    logger.i('Homepage iniciada, Building widget');
+    initState() {
+      logger.i('initState() called');
+    }
+    didChangeDependencies() {
+      logger.i('didChangeDependencies() called');
+    }
+    didUpdateWidget(oldWidget){
+      logger.i('didUpdateWidget() called');
+    }
+    deactivate(){
+      logger.i('deactivate() called');
+    }
+    dispose(){
+      logger.i('dispose() called');
+    }
+    reassemble(){
+      logger.i('reassemble() called');
+    }
         final Widget svgIcon = SvgPicture.asset(rutaIcon1, 
           semanticsLabel:'Person1');
 
