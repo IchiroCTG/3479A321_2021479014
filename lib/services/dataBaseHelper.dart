@@ -1,6 +1,7 @@
 import 'package:application_laboratorio3/entities/Actividad.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
+import 'dart:io';
 
 
 class DatabaseHelper {
@@ -10,7 +11,12 @@ class DatabaseHelper {
     _database ??= await initializeDatabase();
     return _database!;
   }
-
+  Future<void> deleteDatabaseFile() async {
+    final path = join(await getDatabasesPath(), 'actividad.db');
+    if (await databaseExists(path)) {
+      await deleteDatabase(path);
+    }
+  }
   Future<Database> initializeDatabase() async {
     final path = join(await getDatabasesPath(), 'actividad.db');
     return openDatabase(
@@ -20,7 +26,7 @@ class DatabaseHelper {
         await db.execute('''
           CREATE TABLE actividades(
             id INTEGER PRIMARY KEY AUTOINCREMENT,
-            nombre TEXT,
+            Nombre TEXT,
             fecha TEXT
           )
         ''');

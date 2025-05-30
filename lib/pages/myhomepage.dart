@@ -3,6 +3,7 @@ import 'package:application_laboratorio3/pages/aboutPage.dart';
 import 'package:application_laboratorio3/pages/activityPage.dart';
 import 'package:application_laboratorio3/pages/listContent_page.dart';
 import 'package:application_laboratorio3/pages/preferencePage.dart';
+import 'package:application_laboratorio3/services/dataBaseHelper.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -27,11 +28,12 @@ class MyHomePage extends StatefulWidget {
 const String rutaIcon1 = 'Assets/Icons/person_ckbul61rtesg.svg' ;
 
 class _MyHomePageState extends State<MyHomePage> {
+  final DatabaseHelper _dbHelper = DatabaseHelper(); //Instancia de la clase DatabaseHelper
   int _counter = 0;
   bool _isResetEnabled= false;
   var logger = Logger(printer: PrettyPrinter());
   
-    Future<void> _loadPreference() async {
+  Future<void> _loadPreference() async {
     final prefs = await SharedPreferences.getInstance();
     setState(() {
       _isResetEnabled = prefs.getBool('isResetEnabled') ?? false;
@@ -95,9 +97,10 @@ class _MyHomePageState extends State<MyHomePage> {
           semanticsLabel:'Person1');
 
     var persistentFooterButtons = [
-        TextButton(onPressed: _incrementCounter, child: Icon(Icons.plus_one),style: TextButton.styleFrom(foregroundColor: Colors.red),), //Boton de incrementar
+        TextButton(onPressed: _incrementCounter, child: Icon(Icons.plus_one),style: TextButton.styleFrom(foregroundColor: Colors.red)), //Boton de incrementar
         TextButton(onPressed: _decrementCounter, child: Icon(Icons.exposure_minus_1),style: TextButton.styleFrom(foregroundColor: Colors.red)), //Boton de incrementar
-        TextButton(onPressed: _isResetEnabled?(){ _resetCounter();}:null, child: Icon(Icons.exposure_zero),style: TextButton.styleFrom(foregroundColor: Colors.red, )) //Boton de incrementar
+        TextButton(onPressed: _isResetEnabled?(){ _resetCounter();}:null, child: Icon(Icons.exposure_zero),style: TextButton.styleFrom(foregroundColor: Colors.red)),
+        TextButton(onPressed:() async{await _dbHelper.deleteDatabaseFile();}, child: Text("Delete"),style: TextButton.styleFrom(foregroundColor: Colors.red)),
       ];
     var card = Card(
       clipBehavior: Clip.hardEdge,

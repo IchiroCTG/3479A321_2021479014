@@ -60,8 +60,7 @@ class _activityPage extends State<activityPage> {
         TextButton(
           onPressed: () {
             _insertActividad(Actividad(
-              id: " ${_actividades.length}", // Auto-incremented by the database
-              Nombre: 'Actividad {_actividades.length}',
+              Nombre: 'Actividad ${_actividades.length + 1}',
               fecha: '${DateTime.now().toIso8601String()}',
             ));
           }, 
@@ -71,8 +70,8 @@ class _activityPage extends State<activityPage> {
                 TextButton(
           onPressed: () {
             _updateActividad(Actividad(
-              id: " ${_actividades.length}", // Auto-incremented by the database
-              Nombre: 'Actividad {_actividades.length}',
+              
+              Nombre: 'Actividad ${_actividades.length + 1}',
               fecha: '${DateTime.now().toIso8601String()}',
             ));
           }, 

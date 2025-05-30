@@ -1,19 +1,22 @@
 class Actividad {
 
-  String id;
+  int? id;
   String fecha;
   String Nombre;
  Actividad({
-  required this.id,
+  this.id,
   required this.fecha,
   required this.Nombre,
  });
  Map<String, dynamic> toMap() {
-    return {
-      'id': id,
+    final map = <String, dynamic>{
       'fecha': fecha,
       'Nombre': Nombre,
     };
+    if (id != null) {
+      map['id'] = id;
+    }
+    return map;
   }
 
   factory Actividad.fromMap(Map<String, dynamic> map) {
