@@ -1,8 +1,10 @@
 
 import 'package:application_laboratorio3/pages/aboutPage.dart';
+import 'package:application_laboratorio3/pages/activityPage.dart';
 import 'package:application_laboratorio3/pages/listContent_page.dart';
 import 'package:application_laboratorio3/pages/preferencePage.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:logger/logger.dart';
 
@@ -26,7 +28,15 @@ const String rutaIcon1 = 'Assets/Icons/person_ckbul61rtesg.svg' ;
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
+  bool _isResetEnabled= false;
+  var logger = Logger(printer: PrettyPrinter());
   
+    Future<void> _loadPreference() async {
+    final prefs = await SharedPreferences.getInstance();
+    setState(() {
+      _isResetEnabled = prefs.getBool('isResetEnabled') ?? false;
+    });
+  }
   void _incrementCounter() {
     setState(() {
 
@@ -49,25 +59,35 @@ class _MyHomePageState extends State<MyHomePage> {
   }
  
   @override
+  initState() {
+    super.initState();
+    logger.i('initState() called');
+    _loadPreference();
+  }
+  @override
   Widget build(BuildContext context) {
 
-    var logger = Logger(printer: PrettyPrinter());
+    
     logger.i('Homepage iniciada, Building widget');
-    /*initState() {
-      logger.i('initState() called');
-    }
+    
+ /*
+     @override
     didChangeDependencies() {
       logger.i('didChangeDependencies() called');
     }
+     @override
     didUpdateWidget(oldWidget){
       logger.i('didUpdateWidget() called');
     }
+     @override
     deactivate(){
       logger.i('deactivate() called');
     }
+     @override
     dispose(){
       logger.i('dispose() called');
     }
+    @override
     reassemble(){
       logger.i('reassemble() called');
     }*/
@@ -77,7 +97,7 @@ class _MyHomePageState extends State<MyHomePage> {
     var persistentFooterButtons = [
         TextButton(onPressed: _incrementCounter, child: Icon(Icons.plus_one),style: TextButton.styleFrom(foregroundColor: Colors.red),), //Boton de incrementar
         TextButton(onPressed: _decrementCounter, child: Icon(Icons.exposure_minus_1),style: TextButton.styleFrom(foregroundColor: Colors.red)), //Boton de incrementar
-        TextButton(onPressed: _resetCounter, child: Icon(Icons.exposure_zero),style: TextButton.styleFrom(foregroundColor: Colors.red)) //Boton de incrementar
+        TextButton(onPressed: _isResetEnabled?(){ _resetCounter();}:null, child: Icon(Icons.exposure_zero),style: TextButton.styleFrom(foregroundColor: Colors.red, )) //Boton de incrementar
       ];
     var card = Card(
       clipBehavior: Clip.hardEdge,
@@ -140,9 +160,19 @@ class _MyHomePageState extends State<MyHomePage> {
             ListTile(
               title: const Text('Preferencias'),
               onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => preferencePage()));
+                Navigator.push(context, MaterialPageRoute(builder: (context) => preferencePage())).then((_){
+                  _loadPreference();
+                });
               },
             ),
+            ListTile(
+              title: const Text('Actividades'),
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => activityPage())).then((_){
+                  _loadPreference();
+                });
+              },
+            )
           ],
         ),
       ),
