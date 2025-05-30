@@ -92,9 +92,16 @@ class _MyHomePageState extends State<MyHomePage> {
     @override
     reassemble(){
       logger.i('reassemble() called');
-    }*/
-        final Widget svgIcon = SvgPicture.asset(rutaIcon1, 
-          semanticsLabel:'Person1');
+    }
+    final Widget svgIcon = SvgPicture.asset(rutaIcon1, 
+    semanticsLabel:'Person1');
+    */
+    final Image image=Image.network('https://picsum.photos/250?image=1',
+                                    width: 250,
+                                    height: 250,
+                                    fit: BoxFit.cover,
+                                  );
+ 
 
     var persistentFooterButtons = [
         TextButton(onPressed: _incrementCounter, child: Icon(Icons.plus_one),style: TextButton.styleFrom(foregroundColor: Colors.red)), //Boton de incrementar
@@ -109,7 +116,7 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [    
-            svgIcon,                  
+            image,                  
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
