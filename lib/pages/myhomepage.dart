@@ -6,7 +6,7 @@ import 'package:application_laboratorio3/pages/preferencePage.dart';
 import 'package:application_laboratorio3/services/dataBaseHelper.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+//import 'package:flutter_svg/flutter_svg.dart';
 import 'package:logger/logger.dart';
 
 
@@ -30,9 +30,19 @@ const String rutaIcon1 = 'Assets/Icons/person_ckbul61rtesg.svg' ;
 class _MyHomePageState extends State<MyHomePage> {
   final DatabaseHelper _dbHelper = DatabaseHelper(); //Instancia de la clase DatabaseHelper
   int _counter = 0;
+  int _counterImage = 1;
   bool _isResetEnabled= false;
   var logger = Logger(printer: PrettyPrinter());
-  
+  String newImagePath = 'https://picsum.photos/250?image=1';
+  void _newImagePath (){
+    setState(() {
+      newImagePath = 'https://picsum.photos/250?image=$_counterImage';
+    });
+    
+  }
+  String _getNewImagePath() {
+    return newImagePath;
+  }
   Future<void> _loadPreference() async {
     final prefs = await SharedPreferences.getInstance();
     setState(() {
@@ -43,6 +53,19 @@ class _MyHomePageState extends State<MyHomePage> {
     setState(() {
 
       _counter++;
+    });
+  }
+    void _nextImage() {
+    setState(() {
+
+      _counterImage++;
+    });
+  }
+  void _previousImage() {
+    setState(() {
+      if (_counterImage > 1) {
+        _counterImage--;
+      }
     });
   }
   void _decrementCounter(){
@@ -96,11 +119,8 @@ class _MyHomePageState extends State<MyHomePage> {
     final Widget svgIcon = SvgPicture.asset(rutaIcon1, 
     semanticsLabel:'Person1');
     */
-    final Image image=Image.network('https://picsum.photos/250?image=1',
-                                    width: 250,
-                                    height: 250,
-                                    fit: BoxFit.cover,
-                                  );
+    
+
  
 
     var persistentFooterButtons = [
@@ -116,12 +136,24 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [    
-            image,                  
+            Image.network(_getNewImagePath(), 
+            width: 250, 
+            height: 250, 
+            fit: BoxFit.cover, 
+            ) ,                  
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text('Las veces que has presionado el boton es: ',style: TextStyle(color: Colors.black)),
                 Text('$_counter',style: TextStyle(color: Colors.black))
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                TextButton(onPressed: _previousImage, child: Text('Anterior Imagen'),style: TextButton.styleFrom(foregroundColor: Colors.red)), //Boton de decrementar
+                TextButton(onPressed: _nextImage, child: Text('Siguiente Imagen'),style: TextButton.styleFrom(foregroundColor: Colors.red)), //Boton de incrementar
+                TextButton(onPressed: _newImagePath, child: Text('Nueva Imagen'),style: TextButton.styleFrom(foregroundColor: Colors.red)), //Boton de incrementar               
               ],
             ),
             Row(
