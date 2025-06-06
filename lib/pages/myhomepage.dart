@@ -55,7 +55,7 @@ class _MyHomePageState extends State<MyHomePage> {
       _counter++;
     });
   }
-    void _nextImage() {
+  void _nextImage() {
     setState(() {
 
       _counterImage++;
