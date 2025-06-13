@@ -1,4 +1,4 @@
-package com.example.application_laboratorio3
+package cl.ichiroctg.labdispositivomoviles
 
 import io.flutter.embedding.android.FlutterActivity
 
