@@ -1,6 +1,10 @@
 
+import 'dart:io';
+
 import 'package:application_laboratorio3/pages/aboutPage.dart';
 import 'package:application_laboratorio3/pages/activityPage.dart';
+import 'package:application_laboratorio3/pages/cameraPage.dart';
+import 'package:application_laboratorio3/pages/galery.dart';
 import 'package:application_laboratorio3/pages/listContent_page.dart';
 import 'package:application_laboratorio3/pages/preferencePage.dart';
 import 'package:application_laboratorio3/services/dataBaseHelper.dart';
@@ -33,7 +37,9 @@ class _MyHomePageState extends State<MyHomePage> {
   int _counterImage = 1;
   bool _isResetEnabled= false;
   var logger = Logger(printer: PrettyPrinter());
+  String? _imagePath;
   String newImagePath = 'https://picsum.photos/250?image=1';
+  List<String> _galleryPaths =[];
   void _newImagePath (){
     setState(() {
       newImagePath = 'https://picsum.photos/250?image=$_counterImage';
@@ -135,12 +141,25 @@ class _MyHomePageState extends State<MyHomePage> {
       child: Column(
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
-          children: [    
-            Image.network(_getNewImagePath(), 
+          children: [
+            _imagePath != null
+                ? Image.file(
+                    File(_imagePath!),
+                    width: 250,
+                    height: 250,
+                    fit: BoxFit.cover,
+                  )
+                : Container(
+                    width: 250,
+                    height: 250,
+                    color: Colors.grey[300],
+                    child: const Center(child: Text('No image selected')),
+                  ),    
+            /*Image.network(_getNewImagePath(), 
             width: 250, 
             height: 250, 
             fit: BoxFit.cover, 
-            ) ,                  
+            ),*/                   
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -214,7 +233,33 @@ class _MyHomePageState extends State<MyHomePage> {
                   _loadPreference();
                 });
               },
-            )
+            ),
+            ListTile(
+              title: const Text('Camera Page'),
+              onTap: () async {
+                final result = await Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const cameraPage()),
+                );
+                if (result != null && result is String) {
+                  setState(() {
+                    _imagePath = result; // Update the image path with the result
+                    _galleryPaths.add(result); // Add the new image path to the gallery
+                  });
+                }
+              },
+            ),
+            ListTile(
+              title: const Text('Galería'),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => GalleryPage(imageUrls: _galleryPaths),
+                  ),
+                );
+              },
+            ),
           ],
         ),
       ),
